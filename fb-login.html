@@ -36,10 +36,12 @@
       // FB.getLoginStatus(function (response) {
       //   statusChangeCallback(response);
       // });
-      FB.login(function (response) {
-        if (response.authResponse) {
-          getUserInfo(response);
-        }
+      FB.logout(function (response) {
+        FB.login(function (response) {
+          if (response.authResponse) {
+            getUserInfo(response);
+          }
+        });      
       });      
     };
 

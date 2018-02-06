@@ -10,13 +10,15 @@
   <script>
     function statusChangeCallback(response) {
       if (response.status === 'connected') {
-        getUserInfo(response);
+        FB.logout(function (response) {
+          
+        });
       } else {
         FB.login(function (response) {
           if (response.authResponse) {
             getUserInfo(response);
           }
-        });
+        }, {scope: 'public_profile,email'});
       }
     }
 
@@ -33,16 +35,9 @@
         xfbml: true,  // parse social plugins on this page
         version: 'v2.8' 
       });
-      // FB.getLoginStatus(function (response) {
-      //   statusChangeCallback(response);
-      // });
-      FB.logout(function (response) {
-        FB.login(function (response) {
-          if (response.authResponse) {
-            getUserInfo(response);
-          }
-        });      
-      });      
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+      });
     };
 
     // Load the SDK asynchronously
@@ -66,8 +61,8 @@
     }
   </script>
 
-  // <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-  // </fb:login-button>
+  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+  </fb:login-button>
 
 </body>
 

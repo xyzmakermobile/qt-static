@@ -52,6 +52,7 @@
     function getUserInfo(response) {
       var accessToken = response.authResponse.accessToken;
       FB.api('/me', function (response) {        
+        console.log(response);
         url = "https://xyzmakermobile.github.io/qt-static/fb-info.html?name=" + response.name + "&token=" + accessToken;
         setTimeout("location.href=url", 0);        
       });

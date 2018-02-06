@@ -8,12 +8,12 @@
     <script>
         var url = location.href;
         var temp = url.split("?")[1];
-        var vars = temp[1].split("&");
+        var vars = temp.split("&");
         for (var i = 0; i < vars.length; i++) {
             if(vars[i].startsWith('name=')) {
-                document.getElementById('userName').innerHTML = vars[i].split[1]; 
+                document.getElementById('userName').innerHTML = vars[i].split('=')[1]; 
             } else if(vars[i].startsWith('token=')) {
-                document.getElementById('token').innerHTML = vars[i].split[1]; 
+                document.getElementById('token').innerHTML = vars[i].split('=')[1]; 
             }
         };
     </script>

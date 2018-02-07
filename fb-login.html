@@ -12,8 +12,13 @@
       if (response.status === 'connected') {
         getUserInfo(response);
       } else {
-        alert('Please login!');
-      }
+        FB.login(function (response) {
+          if (response.authResponse) {
+            getUserInfo(response);
+          } else {
+            alert('Please login!')
+          }
+        });       
     }
 
     function checkLoginState() {

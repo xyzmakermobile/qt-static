@@ -9,17 +9,20 @@
 <body>
   <script>
     function statusChangeCallback(response) {
-//       if (response.status === 'connected') {
-//         FB.logout(function (response) {
-//           console.log('FB.logout()');
-//         });
-//       } else {
-//         FB.login(function (response) {
-//           if (response.authResponse) {
-//             getUserInfo(response);
-//           }
-//         }, {scope: 'public_profile,email'});
-//       }
+      console.log('statusChangeCallback()');
+      if (response.status === 'connected') {
+        console.log('status is connected');
+        if (response.authResponse) {
+          getUserInfo(response);
+        }
+      } else {
+        console.log('status is not connected');
+        FB.login(function (response) {
+          if (response.authResponse) {
+            getUserInfo(response);
+          }
+        }, {scope: 'public_profile,email'});
+      }
     }
 
     function checkLoginState() {
@@ -35,19 +38,16 @@
         xfbml: true,  // parse social plugins on this page
         version: 'v2.8' 
       });
-//       FB.getLoginStatus(function (response) {
-//         statusChangeCallback(response);
-//       });
       
-      FB.logout(function (response) {
-        console.log('FB.logout()');
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
       });
       
-      FB.login(function (response) {
-        if (response.authResponse) {
-          getUserInfo(response);
-        }
-      }, { scope: 'public_profile,email' })      
+//       FB.login(function (response) {
+//         if (response.authResponse) {
+//           getUserInfo(response);
+//         }
+//       }, { scope: 'public_profile,email' })      
     };
 
     // Load the SDK asynchronously
@@ -62,6 +62,7 @@
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
     function getUserInfo(response) {
+      console.log('getUserInfo()');
       var accessToken = response.authResponse.accessToken;
       FB.api('/me', function (response) {        
         console.log(response);

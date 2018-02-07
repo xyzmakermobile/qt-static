@@ -9,19 +9,10 @@
 <body>
   <script>
     function statusChangeCallback(response) {
-      console.log('statusChangeCallback()');
       if (response.status === 'connected') {
-        console.log('status is connected');
-        if (response.authResponse) {
-          getUserInfo(response);
-        }
+        getUserInfo(response);
       } else {
-        console.log('status is not connected');
-        FB.login(function (response) {
-          if (response.authResponse) {
-            getUserInfo(response);
-          }
-        }, {scope: 'public_profile,email'});
+        alert('Please login!');
       }
     }
 
@@ -35,19 +26,12 @@
       FB.init({
         appId: '1495556613832770',
         cookie: true,  
-        xfbml: true,  // parse social plugins on this page
-        version: 'v2.8' 
+        xfbml: false,  // parse social plugins on this page
+        version: 'v2.12' 
       });
-      
       FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
       });
-      
-//       FB.login(function (response) {
-//         if (response.authResponse) {
-//           getUserInfo(response);
-//         }
-//       }, { scope: 'public_profile,email' })      
     };
 
     // Load the SDK asynchronously
@@ -62,18 +46,13 @@
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
     function getUserInfo(response) {
-      console.log('getUserInfo()');
       var accessToken = response.authResponse.accessToken;
-      FB.api('/me', function (response) {        
-        console.log(response);
-        url = "https://xyzmakermobile.github.io/qt-static/fb-info.html?name=" + response.name + "&token=" + accessToken;
+      FB.api('/me?fields=id,name,email', function (response) {        
+        url = "https://xyzmakermobile.github.io/qt-static/fb-info.html?email=" + response.email + "&name=" + response.name + "&token=" + accessToken;
         setTimeout("location.href=url", 0);        
       });
     }
   </script>
-
-  <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-  </fb:login-button> -->
 
 </body>
 

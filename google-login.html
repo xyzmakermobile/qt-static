@@ -10,6 +10,7 @@
   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
   <script>
     function init() {
+			console.log('init()');
 			gapi.load('client:auth2', {
 				callback: function() {
 					// Initialize client library
@@ -17,7 +18,7 @@
 					gapi.client.init({
 							apiKey: 'V6HMWqkXpxEKVe5uFCRpa9at',
 							client_id: '278654058843-3odoh27jg4shvajnjub447prahq8h0tu.apps.googleusercontent.com',
-							scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me'
+							scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
 					}).then(			// On success
 				function(success) {
 			  		// After library is successfully loaded then enable the login button
@@ -36,13 +37,16 @@
     }
 	  
 		function checkLogin(){
+			console.log('checkLogin()');
 			var googleuser = gapi.auth2.getAuthInstance().currentUser.get()
 			if(googleuser.isSignedIn()){
+				console.log('isSignedIn() true');
 				getUserInfo(googleuser);
 			}
 		}
 	  
     function getUserInfo(googleuser) {
+			console.log('getUserInfo()');
 			var profile = googleuser.getBasicProfile();
 
 			url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + profile.getEmail() + "&name=" + profile.getName() + "&token=" + googleuser.getAuthResponse().access_token;

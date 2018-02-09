@@ -16,7 +16,7 @@
 					// Initialize client library
 					// clientId & scope is provided => automatically initializes auth2 library
 					gapi.client.init({
-							apiKey: 'V6HMWqkXpxEKVe5uFCRpa9at',
+							apiKey: 'AIzaSyAW8cL_xBmmR4aoq_gkfo6102xbXoAz0aY',
 							client_id: '278654058843-3odoh27jg4shvajnjub447prahq8h0tu.apps.googleusercontent.com',
 							scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email  https://www.googleapis.com/auth/plus.me'
 					}).then(			// On success
@@ -38,6 +38,34 @@
 	  
 		function checkLogin(){
 			console.log('checkLogin()');
+			
+			// API call for Google login
+			gapi.auth2.getAuthInstance().signIn().then(
+				// On success
+				function(success) {
+					// API call to get user information
+					gapi.client.request({ path: 'https://www.googleapis.com/plus/v1/people/me' }).then(
+						// On success
+						function(success) {
+							console.log(success);
+							var user_info = JSON.parse(success.body);
+							console.log(user_info);
+
+							getUserInfo(gapi.auth2.getAuthInstance().currentUser.get());
+						},
+						// On error
+						function(error) {
+							alert('Error : Failed to get user user information');
+						}
+					);
+				},
+				// On error
+				function(error) {
+					alert('Error : Login Failed');
+				}
+			);
+			
+			/*
 			var auth2 = gapi.auth2.getAuthInstance();
 			var googleuser = auth2.currentUser.get();
 			if(googleuser.isSignedIn){
@@ -46,6 +74,7 @@
 			}else{
 				console.log('googleuser.isSignedIn() false');
 			}
+			*/
 		}
 	  
     function getUserInfo(googleuser) {

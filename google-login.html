@@ -11,20 +11,34 @@
   <script>
     var auth2;
     function init() {
+			console.log('init()');
       gapi.load('auth2', function() { 
         auth2 = gapi.auth2.init({
+				console.log('gapi.auth2.init()');
           client_id: '278654058843-3odoh27jg4shvajnjub447prahq8h0tu.apps.googleusercontent.com'
         });
       });
     }
 	  
 		var googleuser = auth2.currentUser.get();
-		if(googleuser.isSignedIn()){
-				var profile = googleuser.getBasicProfile();
-			
-        url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + profile.getEmail() + "&name=" + profile.getName() + "&token=" + googleuser.getAuthResponse().access_token;
-        setTimeout("location.href=url", 0);  
+		if(googleuser.isSignedIn()){gapi.auth2.init
+			console.log('isSignedIn() true');
+			getUserInfo(googleuser);
+		}else{
+			console.log('isSignedIn() false');
 		}
+	  
+    function getUserInfo(googleuser) {
+			console.log('getUserInfo()');
+			var profile = googleuser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+			url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + profile.getEmail() + "&name=" + profile.getName() + "&token=" + googleuser.getAuthResponse().access_token;
+			setTimeout("location.href=url", 0);  
+    }
   </script>
 
 </body>

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
   <script>
     function init() {
 			console.log('init()');
@@ -51,6 +51,8 @@
 			url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + profile.getEmail() + "&name=" + profile.getName() + "&token=" + googleuser.getAuthResponse().access_token;
 			setTimeout("location.href=url", 0);  
     }
+		
+		init();
   </script>
 
 </body>

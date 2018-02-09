@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Google Login for QT</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <script src="https://apis.google.com/js/platform.js?onload=onloadCallback" async defer></script>
+  <div id="google-login-btn"></div>
+  <script>
+	//implement callback function
+	var auth2;
+	function onloadCallback() {
+		gapi.load('auth2', function() {
+			auth2 = gapi.auth2.init({
+            client_id: '278654058843-3odoh27jg4shvajnjub447prahq8h0tu.apps.googleusercontent.com'
+			});
+			//attach event callback for clicking login btn
+			auth2.attachClickHandler('google-login-btn', {}, onSuccess, onFailure);
+		});
+		//render the default style google btn
+		gapi.signin2.render('google-login-btn');
+	}
+	
+	function onSuccess (googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail());    
+	  
+	  url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + profile.getEmail() + "&name=" + profile.getName() + "&token=" + googleUser.getAuthResponse().id_token;
+	  setTimeout("location.href=url", 0);      
+	}
+	function onFailure(error) {
+		console.log(error);
+	};
+  </script>
+
+</body>
+
+</html>

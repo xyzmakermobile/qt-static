@@ -38,7 +38,7 @@
 	  
 		function checkLogin(){
 			console.log('checkLogin()');
-			var googleuser = gapi.auth2.getAuthInstance().currentUser.get()
+			var googleuser = gapi.auth2.getAuthInstance().currentUser.get();
 			if(googleuser.isSignedIn()){
 				console.log('isSignedIn() true');
 				getUserInfo(googleuser);

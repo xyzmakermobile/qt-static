@@ -14,14 +14,13 @@
 			console.log('init()');
       gapi.load('auth2', function() { 
         auth2 = gapi.auth2.init({
-				console.log('gapi.auth2.init()');
           client_id: '278654058843-3odoh27jg4shvajnjub447prahq8h0tu.apps.googleusercontent.com'
         });
       });
     }
 	  
 		var googleuser = auth2.currentUser.get();
-		if(googleuser.isSignedIn()){gapi.auth2.init
+		if(googleuser.isSignedIn()){
 			console.log('isSignedIn() true');
 			getUserInfo(googleuser);
 		}else{

@@ -38,28 +38,13 @@
 	  
 		function checkLogin(){
 			console.log('checkLogin()');
-			
-			
 			var auth2 = gapi.auth2.getAuthInstance();
-			var user = auth2.currentUser.get();
-			if(auth2.isSignedIn.get()){
-				console.log('auth2.isSignedIn.get() true');
-			}else{
-				console.log('auth2.isSignedIn.get() false');
-			}
-			if(user.isSignedIn){
-				console.log('user.isSignedIn() true');
-			}else{
-				console.log('user.isSignedIn() false');
-			}
-			
-			
-			
-			
-			var googleuser = gapi.auth2.getAuthInstance().currentUser.get();
-			if(googleuser.isSignedIn()){
-				console.log('isSignedIn() true');
+			var googleuser = auth2.currentUser.get();
+			if(googleuser.isSignedIn){
+				console.log('googleuser.isSignedIn() true');
 				getUserInfo(googleuser);
+			}else{
+				console.log('googleuser.isSignedIn() false');
 			}
 		}
 	  

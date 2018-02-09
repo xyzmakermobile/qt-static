@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Google Information</title>
+<meta charset="UTF-8">
+</head>
+<body>
+    User Name: <br/>
+    <div id="userName"></div>
+    
+    <br/> Email: <br/>
+    <div id="email">
+    </div>
+
+    <br/> Token: <br/>
+    <div id="token"></div>
+
+    <script>
+        var url = location.href;
+        var temp = decodeURIComponent(url.split("?")[1]);
+        var vars = temp.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            if(vars[i].startsWith('name=')) {
+                document.getElementById('userName').innerHTML = vars[i].split('=')[1]; 
+            } else if(vars[i].startsWith('email=')) {
+                document.getElementById('email').innerHTML = vars[i].split('=')[1]; 
+            } else if(vars[i].startsWith('token=')) {
+                document.getElementById('token').innerHTML = vars[i].split('=')[1]; 
+            }
+        };
+    </script>
+</body>
+</html>

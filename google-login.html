@@ -42,21 +42,6 @@
 			var auth2 = gapi.auth2.getAuthInstance();
 			var googleuser = auth2.currentUser.get();
 			
-			//auth2.signIn();
-			
-			if(auth2.isSignedIn.get()){
-				console.log('auth2.isSignedIn() true');
-			}else{
-				console.log('auth2.isSignedIn() false');
-			}
-			
-			if(googleuser.isSignedIn()){
-				console.log('googleuser.isSignedIn() true');
-				//getUserInfo(googleuser);
-			}else{
-				console.log('googleuser.isSignedIn() false');
-			}
-			
 			getUserInfo(googleuser);
 		}
 	  

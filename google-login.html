@@ -38,7 +38,7 @@
 	  
 		function checkLogin(){
 			console.log('checkLogin()');
-			
+			/*
 			// API call for Google login
 			gapi.auth2.getAuthInstance().signIn().then(
 				// On success
@@ -65,7 +65,8 @@
 					alert('Error : Login Failed');
 				}
 			);
-			/*
+			*/
+			
 			var auth2 = gapi.auth2.getAuthInstance();
 			var googleuser = auth2.currentUser.get();
 			
@@ -85,7 +86,6 @@
 			}
 			
 			getUserInfo(googleuser);
-			*/
 		}
 	  
     function getUserInfo(googleuser) {

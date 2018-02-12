@@ -38,39 +38,11 @@
 	  
 		function checkLogin(){
 			console.log('checkLogin()');
-			/*
-			// API call for Google login
-			gapi.auth2.getAuthInstance().signIn().then(
-				// On success
-				function(success) {
-					// API call to get user information
-					gapi.client.request({ path: 'https://www.googleapis.com/plus/v1/people/me' }).then(
-						// On success
-						function(success) {
-							console.log(success);
-							var user_info = JSON.parse(success.body);
-							console.log(user_info);
-
-							url = "https://xyzmakermobile.github.io/qt-static/google-info.html?email=" + user_info.emails[0].value + "&name=" + user_info.displayName + "&token=";
-							setTimeout("location.href=url", 0);  
-						},
-						// On error
-						function(error) {
-							alert('Error : Failed to get user user information');
-						}
-					);
-				},
-				// On error
-				function(error) {
-					alert('Error : Login Failed');
-				}
-			);
-			*/
 			
 			var auth2 = gapi.auth2.getAuthInstance();
 			var googleuser = auth2.currentUser.get();
 			
-			auth2.signIn();
+			//auth2.signIn();
 			
 			if(auth2.isSignedIn.get()){
 				console.log('auth2.isSignedIn() true');

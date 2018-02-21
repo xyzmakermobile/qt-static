@@ -11,9 +11,9 @@
     var date = new Date();
     var searchKey = window.location.search;
     if(date.getUTCHours() < 12) {
-    	window.location.herf = 'https://xyzmaker.avosapps.us/iap' + searchKey;
+    	window.location.replace('https://xyzmaker.avosapps.us/iap' + searchKey);
     } else { // 12 ~ 23
-    	window.location.herf = 'https://xyzmaker-1.avosapps.us/iap' + searchKey;
+    	window.location.replace('https://xyzmaker-1.avosapps.us/iap' + searchKey);
     }
   </script>
 
